@@ -181,7 +181,7 @@ namespace Azure.Security.KeyVault.Test
         [Test]
         public async Task GetSecretVersionsNonExisting()
         {
-            List<SecretProperties> allSecrets = await Client.GetSecretVersionsAsync(Recording.GenerateId()).ToEnumerableAsync();
+            List<SecretProperties> allSecrets = await Client.ListSecretVersionsAsync(Recording.GenerateId()).ToEnumerableAsync();
 
             Assert.AreEqual(0, allSecrets.Count);
         }
@@ -335,7 +335,7 @@ namespace Azure.Security.KeyVault.Test
                 RegisterForCleanup(secret.Name);
             }
 
-            List<SecretProperties> allSecrets = await Client.GetSecretsAsync().ToEnumerableAsync();
+            List<SecretProperties> allSecrets = await Client.ListSecretsAsync().ToEnumerableAsync();
 
             foreach (Secret createdSecret in createdSecrets)
             {
@@ -358,7 +358,7 @@ namespace Azure.Security.KeyVault.Test
 
             RegisterForCleanup(createdSecrets.First().Name);
 
-            List<SecretProperties> allSecrets = await Client.GetSecretVersionsAsync(secretName).ToEnumerableAsync();
+            List<SecretProperties> allSecrets = await Client.ListSecretVersionsAsync(secretName).ToEnumerableAsync();
 
             foreach (Secret createdSecret in createdSecrets)
             {
@@ -388,7 +388,7 @@ namespace Azure.Security.KeyVault.Test
                 await WaitForDeletedSecret(deletedSecret.Name);
             }
 
-            List<DeletedSecret> allSecrets = await Client.GetDeletedSecretsAsync().ToEnumerableAsync();
+            List<DeletedSecret> allSecrets = await Client.ListDeletedSecretsAsync().ToEnumerableAsync();
 
             foreach (Secret deletedSecret in deletedSecrets)
             {

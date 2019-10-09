@@ -173,11 +173,11 @@ namespace Azure.Security.KeyVault.Certificates
         /// <param name="name">The name of the <see cref="Certificate"/> to retrieve</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
         /// <returns>A response containing the certificate and policy as a <see cref="CertificateWithPolicy"/> instance</returns>
-        public virtual Response<CertificateWithPolicy> GetCertificateWithPolicy(string name, CancellationToken cancellationToken = default)
+        public virtual Response<CertificateWithPolicy> GetCertificate(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using DiagnosticScope scope = _pipeline.CreateScope("Azure.Security.KeyVault.Certificates.CertificateClient.GetCertificateWithPolicy");
+            using DiagnosticScope scope = _pipeline.CreateScope("Azure.Security.KeyVault.Certificates.CertificateClient.GetCertificate");
             scope.AddAttribute("certificate", name);
             scope.Start();
 
@@ -198,11 +198,11 @@ namespace Azure.Security.KeyVault.Certificates
         /// <param name="name">The name of the <see cref="Certificate"/> to retrieve</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
         /// <returns>A response containing the certificate and policy as a <see cref="CertificateWithPolicy"/> instance</returns>
-        public virtual async Task<Response<CertificateWithPolicy>> GetCertificateWithPolicyAsync(string name, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CertificateWithPolicy>> GetCertificateAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using DiagnosticScope scope = _pipeline.CreateScope("Azure.Security.KeyVault.Certificates.CertificateClient.GetCertificateWithPolicy");
+            using DiagnosticScope scope = _pipeline.CreateScope("Azure.Security.KeyVault.Certificates.CertificateClient.GetCertificate");
             scope.AddAttribute("certificate", name);
             scope.Start();
 
@@ -224,11 +224,11 @@ namespace Azure.Security.KeyVault.Certificates
         /// <param name="version">Ther version of the <see cref="Certificate"/> to retrieve</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
         /// <returns>The requested <see cref="Certificate"/></returns>
-        public virtual Response<Certificate> GetCertificate(string name, string version, CancellationToken cancellationToken = default)
+        public virtual Response<Certificate> GetCertificateVersion(string name, string version, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using DiagnosticScope scope = _pipeline.CreateScope("Azure.Security.KeyVault.Certificates.CertificateClient.GetCertificate");
+            using DiagnosticScope scope = _pipeline.CreateScope("Azure.Security.KeyVault.Certificates.CertificateClient.GetCertificateVersion");
             scope.AddAttribute("certificate", name);
             scope.Start();
 
@@ -250,12 +250,12 @@ namespace Azure.Security.KeyVault.Certificates
         /// <param name="version">Ther version of the <see cref="Certificate"/> to retrieve</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
         /// <returns>The requested <see cref="Certificate"/></returns>
-        public virtual async Task<Response<Certificate>> GetCertificateAsync(string name, string version, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Certificate>> GetCertificateVersionAsync(string name, string version, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNullOrEmpty(version, nameof(version));
 
-            using DiagnosticScope scope = _pipeline.CreateScope("Azure.Security.KeyVault.Certificates.CertificateClient.GetCertificate");
+            using DiagnosticScope scope = _pipeline.CreateScope("Azure.Security.KeyVault.Certificates.CertificateClient.GetCertificateVersion");
             scope.AddAttribute("certificate", name);
             scope.Start();
 
@@ -697,11 +697,11 @@ namespace Azure.Security.KeyVault.Certificates
         /// <param name="includePending">Specifies whether to include certificates in a pending state as well</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
         /// <returns>An enumerable collection of certificate metadata</returns>
-        public virtual Pageable<CertificateProperties> GetCertificates(bool? includePending = default, CancellationToken cancellationToken = default)
+        public virtual Pageable<CertificateProperties> ListCertificates(bool? includePending = default, CancellationToken cancellationToken = default)
         {
             Uri firstPageUri = includePending.HasValue ? _pipeline.CreateFirstPageUri(CertificatesPath, new ValueTuple<string, string>("includePending", includePending.Value.ToString(CultureInfo.InvariantCulture).ToLowerInvariant())) : _pipeline.CreateFirstPageUri(CertificatesPath);
 
-            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new CertificateProperties(), "Azure.Security.KeyVault.Keys.KeyClient.GetCertificates", cancellationToken));
+            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new CertificateProperties(), "Azure.Security.KeyVault.Keys.KeyClient.ListCertificates", cancellationToken));
         }
 
         /// <summary>
@@ -710,11 +710,11 @@ namespace Azure.Security.KeyVault.Certificates
         /// <param name="includePending">Specifies whether to include certificates in a pending state as well</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
         /// <returns>An enumerable collection of certificate metadata</returns>
-        public virtual AsyncPageable<CertificateProperties> GetCertificatesAsync(bool? includePending = default, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<CertificateProperties> ListCertificatesAsync(bool? includePending = default, CancellationToken cancellationToken = default)
         {
             Uri firstPageUri = includePending.HasValue ? _pipeline.CreateFirstPageUri(CertificatesPath, new ValueTuple<string, string>("includePending", includePending.Value.ToString(CultureInfo.InvariantCulture).ToLowerInvariant())) : _pipeline.CreateFirstPageUri(CertificatesPath);
 
-            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new CertificateProperties(), "Azure.Security.KeyVaultCertificates.CertificateClient.GetCertificates", cancellationToken));
+            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new CertificateProperties(), "Azure.Security.KeyVaultCertificates.CertificateClient.ListCertificates", cancellationToken));
         }
 
         /// <summary>
@@ -724,13 +724,13 @@ namespace Azure.Security.KeyVault.Certificates
         /// <param name="name">The name of the certificate to retrieve the versions of</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
         /// <returns>An enumerable collection of the certificate's versions</returns>
-        public virtual IEnumerable<CertificateProperties> GetCertificateVersions(string name, CancellationToken cancellationToken = default)
+        public virtual IEnumerable<CertificateProperties> ListCertificateVersions(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             Uri firstPageUri = _pipeline.CreateFirstPageUri($"{CertificatesPath}{name}/versions");
 
-            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new CertificateProperties(), "Azure.Security.KeyVaultCertificates.CertificateClient.GetCertificateVersions", cancellationToken));
+            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new CertificateProperties(), "Azure.Security.KeyVaultCertificates.CertificateClient.ListCertificateVersions", cancellationToken));
         }
 
         /// <summary>
@@ -740,13 +740,13 @@ namespace Azure.Security.KeyVault.Certificates
         /// <param name="name">The name of the certificate to retrieve the versions of</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
         /// <returns>An enumerable collection of the certificate's versions</returns>
-        public virtual AsyncPageable<CertificateProperties> GetCertificateVersionsAsync(string name, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<CertificateProperties> ListCertificateVersionsAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             Uri firstPageUri = _pipeline.CreateFirstPageUri($"{CertificatesPath}{name}/versions");
 
-            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new CertificateProperties(), "Azure.Security.KeyVaultCertificates.CertificateClient.GetCertificateVersions", cancellationToken));
+            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new CertificateProperties(), "Azure.Security.KeyVaultCertificates.CertificateClient.ListCertificateVersions", cancellationToken));
         }
 
         /// <summary>
@@ -754,11 +754,11 @@ namespace Azure.Security.KeyVault.Certificates
         /// </summary>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
         /// <returns>An enumerable collection of deleted certificates</returns>
-        public virtual Pageable<DeletedCertificate> GetDeletedCertificates(CancellationToken cancellationToken = default)
+        public virtual Pageable<DeletedCertificate> ListDeletedCertificates(CancellationToken cancellationToken = default)
         {
             Uri firstPageUri = _pipeline.CreateFirstPageUri(DeletedCertificatesPath);
 
-            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new DeletedCertificate(), "Azure.Security.KeyVaultCertificates.CertificateClient.GetDeletedCertificates", cancellationToken));
+            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new DeletedCertificate(), "Azure.Security.KeyVaultCertificates.CertificateClient.ListDeletedCertificates", cancellationToken));
         }
 
         /// <summary>
@@ -766,11 +766,11 @@ namespace Azure.Security.KeyVault.Certificates
         /// </summary>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
         /// <returns>An enumerable collection of deleted certificates</returns>
-        public virtual AsyncPageable<DeletedCertificate> GetDeletedCertificatesAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<DeletedCertificate> ListDeletedCertificatesAsync(CancellationToken cancellationToken = default)
         {
             Uri firstPageUri = _pipeline.CreateFirstPageUri(DeletedCertificatesPath);
 
-            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new DeletedCertificate(), "Azure.Security.KeyVaultCertificates.CertificateClient.GetDeletedCertificates", cancellationToken));
+            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new DeletedCertificate(), "Azure.Security.KeyVaultCertificates.CertificateClient.ListDeletedCertificates", cancellationToken));
         }
 
         //
@@ -1092,11 +1092,11 @@ namespace Azure.Security.KeyVault.Certificates
         /// </summary>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
         /// <returns>An enumerable collection of certificate issuers metadata</returns>
-        public virtual Pageable<IssuerProperties> GetIssuers(CancellationToken cancellationToken = default)
+        public virtual Pageable<IssuerProperties> ListIssuers(CancellationToken cancellationToken = default)
         {
             Uri firstPageUri = _pipeline.CreateFirstPageUri(IssuersPath);
 
-            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new IssuerProperties(), "Azure.Security.KeyVaultCertificates.CertificateClient.GetIssuers", cancellationToken));
+            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new IssuerProperties(), "Azure.Security.KeyVaultCertificates.CertificateClient.ListIssuers", cancellationToken));
         }
 
         /// <summary>
@@ -1104,11 +1104,11 @@ namespace Azure.Security.KeyVault.Certificates
         /// </summary>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
         /// <returns>An enumerable collection of certificate issuers metadata</returns>
-        public virtual AsyncPageable<IssuerProperties> GetIssuersAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<IssuerProperties> ListIssuersAsync(CancellationToken cancellationToken = default)
         {
             Uri firstPageUri = _pipeline.CreateFirstPageUri(IssuersPath);
 
-            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new IssuerProperties(), "Azure.Security.KeyVaultCertificates.CertificateClient.GetIssuers", cancellationToken));
+            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new IssuerProperties(), "Azure.Security.KeyVaultCertificates.CertificateClient.ListIssuers", cancellationToken));
         }
 
         //

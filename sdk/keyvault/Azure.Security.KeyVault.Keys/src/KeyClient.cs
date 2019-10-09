@@ -395,11 +395,11 @@ namespace Azure.Security.KeyVault.Keys
         /// </remarks>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
         /// <exception cref="RequestFailedException">The server returned an error. See <see cref="Exception.Message"/> for details returned from the server.</exception>
-        public virtual Pageable<KeyProperties> GetKeys(CancellationToken cancellationToken = default)
+        public virtual Pageable<KeyProperties> ListKeys(CancellationToken cancellationToken = default)
         {
             Uri firstPageUri = _pipeline.CreateFirstPageUri(KeysPath);
 
-            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new KeyProperties(), "Azure.Security.KeyVault.Keys.KeyClient.GetKeys", cancellationToken));
+            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new KeyProperties(), "Azure.Security.KeyVault.Keys.KeyClient.ListKeys", cancellationToken));
         }
 
         /// <summary>
@@ -413,11 +413,11 @@ namespace Azure.Security.KeyVault.Keys
         /// permission.
         /// </remarks>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
-        public virtual AsyncPageable<KeyProperties> GetKeysAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<KeyProperties> ListKeysAsync(CancellationToken cancellationToken = default)
         {
             Uri firstPageUri = _pipeline.CreateFirstPageUri(KeysPath);
 
-            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new KeyProperties(), "Azure.Security.KeyVault.Keys.KeyClient.GetKeys", cancellationToken));
+            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new KeyProperties(), "Azure.Security.KeyVault.Keys.KeyClient.ListKeys", cancellationToken));
         }
 
         /// <summary>
@@ -432,13 +432,13 @@ namespace Azure.Security.KeyVault.Keys
         /// <exception cref="ArgumentException"><paramref name="name"/> is an empty string.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="name"/> is null.</exception>
         /// <exception cref="RequestFailedException">The server returned an error. See <see cref="Exception.Message"/> for details returned from the server.</exception>
-        public virtual Pageable<KeyProperties> GetKeyVersions(string name, CancellationToken cancellationToken = default)
+        public virtual Pageable<KeyProperties> ListKeyVersions(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             Uri firstPageUri = _pipeline.CreateFirstPageUri($"{KeysPath}{name}/versions");
 
-            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new KeyProperties(), "Azure.Security.KeyVault.Keys.KeyClient.GetKeyVersions", cancellationToken));
+            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new KeyProperties(), "Azure.Security.KeyVault.Keys.KeyClient.ListKeyVersions", cancellationToken));
         }
 
         /// <summary>
@@ -453,13 +453,13 @@ namespace Azure.Security.KeyVault.Keys
         /// <exception cref="ArgumentException"><paramref name="name"/> is an empty string.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="name"/> is null.</exception>
         /// <exception cref="RequestFailedException">The server returned an error. See <see cref="Exception.Message"/> for details returned from the server.</exception>
-        public virtual AsyncPageable<KeyProperties> GetKeyVersionsAsync(string name, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<KeyProperties> ListKeyVersionsAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             Uri firstPageUri = _pipeline.CreateFirstPageUri($"{KeysPath}{name}/versions");
 
-            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new KeyProperties(), "Azure.Security.KeyVault.Keys.KeyClient.GetKeyVersions", cancellationToken));
+            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new KeyProperties(), "Azure.Security.KeyVault.Keys.KeyClient.ListKeyVersions", cancellationToken));
         }
 
         /// <summary>
@@ -609,11 +609,11 @@ namespace Azure.Security.KeyVault.Keys
         /// </remarks>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
         /// <exception cref="RequestFailedException">The server returned an error. See <see cref="Exception.Message"/> for details returned from the server.</exception>
-        public virtual Pageable<DeletedKey> GetDeletedKeys(CancellationToken cancellationToken = default)
+        public virtual Pageable<DeletedKey> ListDeletedKeys(CancellationToken cancellationToken = default)
         {
             Uri firstPageUri = _pipeline.CreateFirstPageUri(DeletedKeysPath);
 
-            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new DeletedKey(), "Azure.Security.KeyVault.Keys.KeyClient.GetDeletedKeys", cancellationToken));
+            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new DeletedKey(), "Azure.Security.KeyVault.Keys.KeyClient.ListDeletedKeys", cancellationToken));
         }
 
         /// <summary>
@@ -629,11 +629,11 @@ namespace Azure.Security.KeyVault.Keys
         /// </remarks>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
         /// <exception cref="RequestFailedException">The server returned an error. See <see cref="Exception.Message"/> for details returned from the server.</exception>
-        public virtual AsyncPageable<DeletedKey> GetDeletedKeysAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<DeletedKey> ListDeletedKeysAsync(CancellationToken cancellationToken = default)
         {
             Uri firstPageUri = _pipeline.CreateFirstPageUri(DeletedKeysPath);
 
-            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new DeletedKey(), "Azure.Security.KeyVault.Keys.KeyClient.GetDeletedKeys", cancellationToken));
+            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new DeletedKey(), "Azure.Security.KeyVault.Keys.KeyClient.ListDeletedKeys", cancellationToken));
         }
 
         /// <summary>

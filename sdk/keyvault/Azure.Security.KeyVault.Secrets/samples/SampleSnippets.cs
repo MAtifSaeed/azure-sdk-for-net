@@ -103,7 +103,7 @@ namespace Azure.Security.KeyVault.Secrets.Samples
         public void ListSecrets()
         {
             #region ListSecrets
-            Pageable<SecretProperties> allSecrets = client.GetSecrets();
+            Pageable<SecretProperties> allSecrets = client.ListSecrets();
 
             foreach (SecretProperties secretProperties in allSecrets)
             {

@@ -80,8 +80,8 @@ namespace Azure.Security.KeyVault.Test
         [Test]
         public void GetSecretVersionsArgumentValidation()
         {
-            Assert.Throws<ArgumentNullException>(() => Client.GetSecretVersionsAsync(null));
-            Assert.Throws<ArgumentException>(() => Client.GetSecretVersionsAsync(""));
+            Assert.Throws<ArgumentNullException>(() => Client.ListSecretVersionsAsync(null));
+            Assert.Throws<ArgumentException>(() => Client.ListSecretVersionsAsync(""));
         }
     }
 }

@@ -46,7 +46,7 @@ namespace Azure.Security.KeyVault.Certificates.Samples
             await certOp2.WaitCompletionAsync();
 
             // Let's list the certificates which exist in the vault along with their thumbprints
-            await foreach (CertificateProperties cert in client.GetCertificatesAsync())
+            await foreach (CertificateProperties cert in client.ListCertificatesAsync())
             {
                 Debug.WriteLine($"Certificate is returned with name {cert.Name} and thumbprint {BitConverter.ToString(cert.X509Thumbprint)}");
             }
@@ -57,7 +57,7 @@ namespace Azure.Security.KeyVault.Certificates.Samples
             await newCertOp.WaitCompletionAsync();
 
             // Let's print all the versions of this certificate
-            await foreach (CertificateProperties cert in client.GetCertificateVersionsAsync(certName1))
+            await foreach (CertificateProperties cert in client.ListCertificateVersionsAsync(certName1))
             {
                 Debug.WriteLine($"Certificate {cert.Name} with name {cert.Version}");
             }
@@ -72,7 +72,7 @@ namespace Azure.Security.KeyVault.Certificates.Samples
             Assert.IsTrue(await WaitForDeletedCertificateAsync(client, certName2));
 
             // You can list all the deleted and non-purged certificates, assuming Key Vault is soft-delete enabled.
-            await foreach (DeletedCertificate deletedCert in client.GetDeletedCertificatesAsync())
+            await foreach (DeletedCertificate deletedCert in client.ListDeletedCertificatesAsync())
             {
                 Debug.WriteLine($"Deleted certificate's recovery Id {deletedCert.RecoveryId}");
             }

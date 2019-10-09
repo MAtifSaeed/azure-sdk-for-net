@@ -100,8 +100,8 @@ namespace Azure.Security.KeyVault.Keys.Tests
         [Test]
         public void GetKeyVersionsArgumentValidation()
         {
-            Assert.Throws<ArgumentNullException>(() => Client.GetKeyVersionsAsync(null));
-            Assert.Throws<ArgumentException>(() => Client.GetKeyVersionsAsync(string.Empty));
+            Assert.Throws<ArgumentNullException>(() => Client.ListKeyVersionsAsync(null));
+            Assert.Throws<ArgumentException>(() => Client.ListKeyVersionsAsync(string.Empty));
         }
     }
 }

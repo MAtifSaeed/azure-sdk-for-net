@@ -132,13 +132,13 @@ namespace Azure.Security.KeyVault.Secrets
         /// </remarks>
         /// <param name="name">The name of the secret.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
-        public virtual AsyncPageable<SecretProperties> GetSecretVersionsAsync(string name, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<SecretProperties> ListSecretVersionsAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             Uri firstPageUri = new Uri(_vaultUri, $"{SecretsPath}{name}/versions?api-version={_pipeline.ApiVersion}");
 
-            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new SecretProperties(), "Azure.Security.KeyVault.Secrets.SecretClient.GetSecretVersions", cancellationToken));
+            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new SecretProperties(), "Azure.Security.KeyVault.Secrets.SecretClient.ListSecretVersions", cancellationToken));
         }
 
         /// <summary>
@@ -151,13 +151,13 @@ namespace Azure.Security.KeyVault.Secrets
         /// </remarks>
         /// <param name="name">The name of the secret.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
-        public virtual Pageable<SecretProperties> GetSecretVersions(string name, CancellationToken cancellationToken = default)
+        public virtual Pageable<SecretProperties> ListSecretVersions(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             Uri firstPageUri = new Uri(_vaultUri, $"{SecretsPath}{name}/versions?api-version={_pipeline.ApiVersion}");
 
-            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new SecretProperties(), "Azure.Security.KeyVault.Secrets.SecretClient.GetSecretVersions", cancellationToken));
+            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new SecretProperties(), "Azure.Security.KeyVault.Secrets.SecretClient.ListSecretVersions", cancellationToken));
         }
 
         /// <summary>
@@ -170,11 +170,11 @@ namespace Azure.Security.KeyVault.Secrets
         /// requires the secrets/list permission.
         /// </remarks>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
-        public virtual AsyncPageable<SecretProperties> GetSecretsAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<SecretProperties> ListSecretsAsync(CancellationToken cancellationToken = default)
         {
             Uri firstPageUri = new Uri(_vaultUri, SecretsPath + $"?api-version={_pipeline.ApiVersion}");
 
-            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new SecretProperties(), "Azure.Security.KeyVault.Secrets.SecretClient.GetSecrets", cancellationToken));
+            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new SecretProperties(), "Azure.Security.KeyVault.Secrets.SecretClient.ListSecrets", cancellationToken));
         }
 
         /// <summary>
@@ -187,11 +187,11 @@ namespace Azure.Security.KeyVault.Secrets
         /// requires the secrets/list permission.
         /// </remarks>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
-        public virtual Pageable<SecretProperties> GetSecrets(CancellationToken cancellationToken = default)
+        public virtual Pageable<SecretProperties> ListSecrets(CancellationToken cancellationToken = default)
         {
             Uri firstPageUri = new Uri(_vaultUri, SecretsPath + $"?api-version={_pipeline.ApiVersion}");
 
-            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new SecretProperties(), "Azure.Security.KeyVault.Secrets.SecretClient.GetSecrets", cancellationToken));
+            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new SecretProperties(), "Azure.Security.KeyVault.Secrets.SecretClient.ListSecrets", cancellationToken));
         }
 
         /// <summary>
@@ -469,11 +469,11 @@ namespace Azure.Security.KeyVault.Secrets
         /// secrets/list permission.
         /// </remarks>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
-        public virtual AsyncPageable<DeletedSecret> GetDeletedSecretsAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<DeletedSecret> ListDeletedSecretsAsync(CancellationToken cancellationToken = default)
         {
             Uri firstPageUri = new Uri(_vaultUri, DeletedSecretsPath + $"?api-version={_pipeline.ApiVersion}");
 
-            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new DeletedSecret(), "Azure.Security.KeyVault.Secrets.SecretClient.GetDeletedSecrets", cancellationToken));
+            return PageResponseEnumerator.CreateAsyncEnumerable(nextLink => _pipeline.GetPageAsync(firstPageUri, nextLink, () => new DeletedSecret(), "Azure.Security.KeyVault.Secrets.SecretClient.ListDeletedSecrets", cancellationToken));
         }
 
         /// <summary>
@@ -485,11 +485,11 @@ namespace Azure.Security.KeyVault.Secrets
         /// secrets/list permission.
         /// </remarks>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
-        public virtual Pageable<DeletedSecret> GetDeletedSecrets(CancellationToken cancellationToken = default)
+        public virtual Pageable<DeletedSecret> ListDeletedSecrets(CancellationToken cancellationToken = default)
         {
             Uri firstPageUri = new Uri(_vaultUri, DeletedSecretsPath + $"?api-version={_pipeline.ApiVersion}");
 
-            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new DeletedSecret(), "Azure.Security.KeyVault.Secrets.SecretClient.GetDeletedSecrets", cancellationToken));
+            return PageResponseEnumerator.CreateEnumerable(nextLink => _pipeline.GetPage(firstPageUri, nextLink, () => new DeletedSecret(), "Azure.Security.KeyVault.Secrets.SecretClient.ListDeletedSecrets", cancellationToken));
         }
 
         /// <summary>

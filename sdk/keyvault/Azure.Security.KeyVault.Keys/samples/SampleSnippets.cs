@@ -136,7 +136,7 @@ namespace Azure.Security.KeyVault.Keys.Samples
         public void ListKeys()
         {
             #region ListKeys
-            Pageable<KeyProperties> allKeys = client.GetKeys();
+            Pageable<KeyProperties> allKeys = client.ListKeys();
 
             foreach (KeyProperties keyProperties in allKeys)
             {

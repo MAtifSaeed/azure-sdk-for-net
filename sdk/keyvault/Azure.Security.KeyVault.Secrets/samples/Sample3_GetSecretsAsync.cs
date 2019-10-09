@@ -57,7 +57,7 @@ namespace Azure.Security.KeyVault.Secrets.Samples
             // You need to check if any of the secrets are sharing same values. Let's list the secrets and print their values.
             // List operations don't return the secrets with value information.
             // So, for each returned secret we call Get to get the secret with its value information.
-            await foreach (SecretProperties secret in client.GetSecretsAsync())
+            await foreach (SecretProperties secret in client.ListSecretsAsync())
             {
                 Secret secretWithValue = await client.GetSecretAsync(secret.Name);
                 Debug.WriteLine($"Secret is returned with name {secretWithValue.Name} and value {secretWithValue.Value}");
@@ -69,7 +69,7 @@ namespace Azure.Security.KeyVault.Secrets.Samples
 
             // You need to check all the different values your bank account password secret had previously.
             // Lets print all the versions of this secret.
-            await foreach (SecretProperties secret in client.GetSecretVersionsAsync(bankSecretName))
+            await foreach (SecretProperties secret in client.ListSecretVersionsAsync(bankSecretName))
             {
                 Debug.WriteLine($"Secret's version {secret.Version} with name {secret.Name}");
             }
@@ -84,7 +84,7 @@ namespace Azure.Security.KeyVault.Secrets.Samples
             Assert.IsTrue(await WaitForDeletedSecretAsync(client, storageSecretName));
 
             // You can list all the deleted and non-purged secrets, assuming key vault is soft-delete enabled.
-            await foreach (DeletedSecret secret in client.GetDeletedSecretsAsync())
+            await foreach (DeletedSecret secret in client.ListDeletedSecretsAsync())
             {
                 Debug.WriteLine($"Deleted secret's recovery Id {secret.RecoveryId}");
             }
