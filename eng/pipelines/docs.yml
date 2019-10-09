@@ -98,8 +98,3 @@ jobs:
           content: '**\*'
           targetFolder: $(Build.ArtifactStagingDirectory)/docfx_project
           overWrite: true
-      - task: PublishPipelineArtifact@0
-        condition: succeeded()
-        inputs:
-          artifactName: docfx_project
-          targetPath: $(Build.ArtifactStagingDirectory)/docfx_project/_site
